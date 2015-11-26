@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<settings>
+  <!-- Интервал указывается в миллисекундах -->
+  <monitor_interval value="10000"/>
+  <interval_attempt value="5000"/>
+  <!-- Указывается либо имя сервера, либо адрес -->
+  <server_name value="localhost"/>
+  <server_port value="8080"/>
+</settings>

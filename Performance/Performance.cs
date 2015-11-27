@@ -30,13 +30,13 @@ namespace Performance
         public override string ToString()
         {
             var builder = new StringBuilder();
-            builder.Append($"Время: {Time}\n");
-            builder.Append($"ID: {MachineIdentifier}\n");
-            builder.Append($"Загруженность процессора: {ProcessorLoad}\n");
-            builder.Append($"Доступная оперативная память: {AvailablePhysicalMemory}\n");
-            builder.Append($"Полная оперативная память: {TotalPhysicalMemory}\n");
-            builder.Append($"Дисковое пространство: {DiskCapacity}\n");
-            builder.Append($"Свободное дисковое пространство: {DiskFreeSpace}");
+            builder.Append(string.Format("Время: {0}\n", Time));
+            builder.Append(string.Format("ID: {0}\n", MachineIdentifier));
+            builder.Append(string.Format("Загруженность процессора: {0}\n", ProcessorLoad));
+            builder.Append(string.Format("Доступная оперативная память: {0}\n", AvailablePhysicalMemory));
+            builder.Append(string.Format("Полная оперативная память: {0}\n", TotalPhysicalMemory));
+            builder.Append(string.Format("Дисковое пространство: {0}\n", DiskCapacity));
+            builder.Append(string.Format("Свободное дисковое пространство: {0}", DiskFreeSpace));
             return builder.ToString();
         }
     }

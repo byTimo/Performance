@@ -90,7 +90,7 @@ namespace Performance
             if (_unsentPackets.Count == 0)
                 return;
             var socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            Console.WriteLine($"Попытка отправить {_unsentPackets.Count} неотправленных пакетов.");
+            Console.WriteLine("Попытка отправить {0} неотправленных пакетов.", _unsentPackets.Count);
             lock (_listBlocker)
             {
                 try
@@ -110,7 +110,7 @@ namespace Performance
                         socket.Shutdown(SocketShutdown.Both);
                     socket.Close();
                     socket.Dispose();
-                    Console.WriteLine($"{_unsentPackets.Count} отправлены успешно.");
+                    Console.WriteLine("{0} отправлены успешно.", _unsentPackets.Count);
                 }
                 catch (Exception ex)
                 {
@@ -130,7 +130,7 @@ namespace Performance
         {
             var messageStringBuilder = new StringBuilder();
             messageStringBuilder.Append("POST HTTP/1.1\r\nContent-Type: application/x-www-form-urlencoded\r\n");
-            messageStringBuilder.Append($"Content-Length: {message.Length}");
+            messageStringBuilder.Append(string.Format("Content-Length: {0}", message.Length));
             messageStringBuilder.Append("\r\n\r\n");
             messageStringBuilder.Append(message);
             return Encoding.UTF8.GetBytes(messageStringBuilder.ToString());

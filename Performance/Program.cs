@@ -39,7 +39,7 @@ namespace Performance
         //Метод, который вызывается всякий раз, когда наступает событие считывания информации о производительности
         private static void SendPerformance(object sender, Performance performance)
         {
-            Console.WriteLine($"Сформирован отчёт от {performance.Time}");
+            Console.WriteLine("Сформирован отчёт от {0}", performance.Time);
             SenderModule.SendPerformance(performance);
         }
 
@@ -79,7 +79,7 @@ namespace Performance
             }
             catch (FileNotFoundException)
             {
-                Console.WriteLine($"Файл {settingDocument} не был найден.");
+                Console.WriteLine("Файл {0} не был найден.", settingDocument);
                 throw;
             }
         }
@@ -92,7 +92,7 @@ namespace Performance
                 var attrib = GetElementAttribute(document, elementName, attribName);
                 int value;
                 if (!int.TryParse(attrib.Value, out value))
-                    throw new Exception($"Не корректно задано значение аттрибута {attribName} элемента {elementName} в файле настроек.");
+                    throw new Exception(string.Format("Не корректно задано значение аттрибута {0} элемента {1} в файле настроек.", attribName, elementName));
                 return value;
             }
             catch (Exception e)
@@ -109,7 +109,7 @@ namespace Performance
                 var attrib = GetElementAttribute(document, elementName, attribName);
                 double value;
                 if (!double.TryParse(attrib.Value, out value))
-                    throw new Exception($"Не корректно задано значение аттрибута {attribName} элемента {elementName} в файле настроек.");
+                    throw new Exception(string.Format("Не корректно задано значение аттрибута {0} элемента {1} в файле настроек.", attribName, elementName));
                 return value;
             }
             catch (Exception e)
@@ -125,11 +125,11 @@ namespace Performance
             {
                 var element = document.DocumentElement[elementName];
                 if (element == null)
-                    throw new Exception($"Невозможно определить значение {elementName} из файла настроек.");
+                    throw new Exception(string.Format("Невозможно определить значение {0} из файла настроек.", elementName));
                 var attrib = element.Attributes[attribName];
                 if (attrib == null)
                     throw new Exception(
-                        $"Невозможно определить аттрибут {attribName} для элемента {elementName} из файла настроек.");
+                       string.Format("Невозможно определить аттрибут {0} для элемента {1} из файла настроек.", attribName, elementName));
                 return attrib;
             }
             catch

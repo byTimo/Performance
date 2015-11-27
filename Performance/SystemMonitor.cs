@@ -65,10 +65,19 @@ namespace Performance
             }
         }
         //Свойство, вызов которого повлечёт за собой определение доступной оперативной памяти компьютера.
-        private ulong AvailablePhysicalMemory => _computerInfo.AvailablePhysicalMemory;
+        private ulong AvailablePhysicalMemory
+        {
+            get { return _computerInfo.AvailablePhysicalMemory; }
+        }
 
         //Свойство, вызов которого повлечёт за собой определение полной оперативной памяти компьютера.
-        private ulong TotalPhysicalMemory => _computerInfo.TotalPhysicalMemory;
+        private ulong TotalPhysicalMemory
+        {
+            get
+            {
+                return _computerInfo.TotalPhysicalMemory;
+            }
+        }
 
         //Свойство, вызов которого повлечёт за собой определение объёма первого жёсткого диска.
         private ulong DiskCapacity

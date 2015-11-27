@@ -14,7 +14,7 @@ namespace Server
             try
             {
                 ConfigureServer("Settings.xml");
-                Console.WriteLine($"Сервер сконфигурирован. Порт {Server.Port}, максимальное количество подключений {Server.MaxConnection}.");
+                Console.WriteLine("Сервер сконфигурирован. Порт {0}, максимальное количество подключений {1}.", Server.Port, Server.MaxConnection);
                 Server.ReceivedPerformance += ReceivePerformance;
                 Server.Start();
                 Console.WriteLine("Сервер запущен.");
@@ -27,7 +27,7 @@ namespace Server
             }
             catch (Exception e)
             {
-                Console.WriteLine($"Аварийное завершение работы программы! Ошибка: {e.Message}");
+                Console.WriteLine("Аварийное завершение работы программы! Ошибка: {0}", e.Message);
                 Console.WriteLine("Нажимте любую клавишу.");
                 Console.ReadKey();
             }
@@ -39,7 +39,7 @@ namespace Server
         
         private static void ReceivePerformance(object sender, Performance performance)
         {
-            Console.WriteLine($"Получена производительность {performance.Time}.");
+            Console.WriteLine("Получена производительность {0}.", performance.Time);
             try
             {
                 DbManager.Instance.Performances.Add(performance);
@@ -47,7 +47,7 @@ namespace Server
             }
             catch (Exception e)
             {
-                Console.WriteLine($"Ошибка при добавлении информации в базу данных. Ошибка: {e.Message}");
+                Console.WriteLine("Ошибка при добавлении информации в базу данных. Ошибка: {0}", e.Message);
             }
         }
 
@@ -77,7 +77,7 @@ namespace Server
             }
             catch (FileNotFoundException)
             {
-                Console.WriteLine($"Файл {settingDocument} не был найден.");
+                Console.WriteLine("Файл {0} не был найден.", settingDocument);
                 throw;
             }
         }
@@ -88,14 +88,14 @@ namespace Server
             {
                 var element = document.DocumentElement[elementName];
                 if (element == null)
-                    throw new Exception($"Невозможно определить значение {elementName} из файла настроек.");
+                    throw new Exception(string.Format("Невозможно определить значение {0} из файла настроек.", elementName));
                 var attrib = element.Attributes[attribName];
                 if (attrib == null)
                     throw new Exception(
-                        $"Невозможно определить аттрибут {attribName} для элемента {elementName} из файла настроек.");
+                        string.Format("Невозможно определить аттрибут {0} для элемента {1} из файла настроек.", attribName, elementName));
                 int value;
                 if(!int.TryParse(attrib.Value, out value))
-                    throw new Exception($"Не корректно задано значение аттрибута {attribName} элемента {elementName} в файле настроек.");
+                    throw new Exception(string.Format("Не корректно задано значение аттрибута {0} элемента {1} в файле настроек.", attribName, elementName));
                 return value;
             }
             catch (Exception e)
